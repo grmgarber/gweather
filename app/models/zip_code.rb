@@ -1,0 +1,3 @@
+class ZipCode < ApplicationRecord
+
+end
