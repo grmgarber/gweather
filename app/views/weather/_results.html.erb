@@ -1,5 +1,5 @@
 <div id='results'>
-  <h2><%= @location.to_s %> Results</h2>
+  <h2><%= @zip_code.with_state_string %> Weather</h2>
   <p>Data extracted from Rails cache: <b><%= @data[:from_cache] %></b></p>
   <p><%= @data[:data] %></p>
 </div>

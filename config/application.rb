@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'boot'
 
 require 'rails'
@@ -19,6 +21,7 @@ require 'rails/test_unit/railtie'
 Bundler.require(*Rails.groups)
 
 module Gweather
+  # See README for details
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1

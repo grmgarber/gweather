@@ -1,14 +1,10 @@
 <h2>Current Weather and Forecast</h2>
-<p>Please enter a valid US location</p>
 
 <%= form_with url: weather_path, model: @location, method: :get, data: {turbo_stream: true} do |f| %>
-  <%= f.label :city %>
-  <%= f.text_field :city %>
-  <%= f.label :state, "US State" %>
-  <%= f.select :state_abbr, options_for_select(us_states_for_select) %>
-  <%= f.label :zip_code %>
-  <%= f.text_field :zip_code %>
-  <%= f.submit 'Look up' %>
+  <%= f.label :zip_code, 'US ZIP Code' %>
+  <%= f.text_field :zip_code, placeholder: '5 digits', required: true, maxlength: 5, minlength: 5 %>
+
+  <%= f.submit 'Look up weather' %>
 <% end %>
 
 <div>

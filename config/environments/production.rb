@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
@@ -47,7 +49,7 @@ Rails.application.configure do
   config.force_ssl = true
 
   # Log to STDOUT by default
-  config.logger = ActiveSupport::Logger.new(STDOUT)
+  config.logger = ActiveSupport::Logger.new($stdout)
                                        .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
                                        .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
 
@@ -60,7 +62,17 @@ Rails.application.configure do
   config.log_level = ENV.fetch('RAILS_LOG_LEVEL', 'info')
 
   # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  config.r_cache_redis_url = 'rediss://my_cache_redis_server:6379/9' # fictitious URL
+
+  config.cache_store = :redis_cache_store, {
+    url: config.r_cache_redis_url,
+    connect_timeout: 30, # Defaults to 20 seconds
+    read_timeout: 1.0,
+    write_timeout: 1.0,
+    reconnect_attempts: 1, # Defaults to 0
+    expires_in: 1.day.to_i,
+    race_condition_ttl: 3
+  }
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter = :resque

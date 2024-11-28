@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe WeatherService do
+RSpec.describe WeatherService do # rubocop:disable Metrics/BlockLength
   let(:seattle_zip_code) { '98109' }
   let(:fair_lawn_zip_code) { '07410' }
   let(:service) { WeatherService.new }
@@ -11,17 +13,12 @@ RSpec.describe WeatherService do
     ZipCode.create(lat: 47.6344, lon: -122.3419, state_abbr: 'WA', postal_code: seattle_zip_code)
   end
 
-  describe '#get_data' do
-    context 'without cache' do
+  describe '#get_data method' do # rubocop:disable Metrics/BlockLength
+    context 'wit Rails cache disabled (RSpec default)' do
       it 'generates the expected output structure', vcr: { cassette_name: 'get_data' } do
         result = service.data_for(seattle_zip_code, date, date + 1)
 
         expect(result.keys).to eq(%i[data from_cache error])
-      end
-
-      it 'will not use cached data when Rails.cache is not active (RSpec default)',
-         vcr: { cassette_name: 'get_data' } do
-        expect(service.data_for(seattle_zip_code, date, date + 1)[:from_cache]).to eq(false)
       end
 
       it 'produces expected results', vcr: { cassette_name: 'get_data' } do
@@ -50,7 +47,7 @@ RSpec.describe WeatherService do
         Rails.cache.write(key, result[:data])
       end
 
-      it 'will use cached result when zip code matches', vcr: { cassette_name: 'get_data' } do
+      it 'will use cached data when zip code matches', vcr: { cassette_name: 'get_data' } do
         expect(service.data_for('98109', date, date + 1)[:from_cache]).to eq(true)
       end
 

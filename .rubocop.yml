@@ -1,0 +1,5 @@
+AllCops:
+  Exclude:
+    - 'bin/bundle'
+  AllCops:
+    NewCops: enable
