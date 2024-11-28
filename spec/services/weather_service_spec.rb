@@ -1,28 +1,31 @@
 require 'rails_helper'
 
 RSpec.describe WeatherService do
+  let(:seattle_zip_code) { '98109' }
+  let(:fair_lawn_zip_code) { '07410' }
+  let(:service) { WeatherService.new }
+  let(:date) { Date.new(2024, 11, 28) }
+
   before do
-    ZipCode.create(lat: 40.9363, lon: -74.119497, state_abbr: 'NJ', postal_code: '07410')
-    ZipCode.create(lat: 47.6344, lon: -122.3419, state_abbr: 'WA', postal_code: '98109')
+    ZipCode.create(lat: 40.9363, lon: -74.119497, state_abbr: 'NJ', postal_code: fair_lawn_zip_code)
+    ZipCode.create(lat: 47.6344, lon: -122.3419, state_abbr: 'WA', postal_code: seattle_zip_code)
   end
 
   describe '#get_data' do
-    let(:service) { WeatherService.new }
-    let(:date) { Date.new(2024, 11, 28) }
-
     context 'without cache' do
       it 'generates the expected output structure', vcr: { cassette_name: 'get_data' } do
-        result = service.data_for('98109', date, date + 1)
+        result = service.data_for(seattle_zip_code, date, date + 1)
 
         expect(result.keys).to eq(%i[data from_cache error])
       end
 
-      it 'will not use cached data by default', vcr: { cassette_name: 'get_data' } do
-        expect(service.data_for('98109', date, date + 1)[:from_cache]).to eq(false)
+      it 'will not use cached data when Rails.cache is not active (RSpec default)',
+         vcr: { cassette_name: 'get_data' } do
+        expect(service.data_for(seattle_zip_code, date, date + 1)[:from_cache]).to eq(false)
       end
 
       it 'produces expected results', vcr: { cassette_name: 'get_data' } do
-        result = service.data_for('98109', date, date + 1)
+        result = service.data_for(seattle_zip_code, date, date + 1)
 
         expect(result[:data].slice('latitude', 'longitude', 'resolvedAddress', 'timezone', 'description'))
           .to eq({
@@ -35,22 +38,24 @@ RSpec.describe WeatherService do
       end
     end
 
-    context 'when a cached result exists' do
-      # We are going to mock Rails cache
+    context 'with Rails cache enabled' do
       let(:memory_store) { ActiveSupport::Cache.lookup_store(:memory_store) }
       let(:cache) { Rails.cache }
-      let!(:result) { service.data_for('98109', date, date + 1) }
+      let!(:result) { service.data_for(seattle_zip_code, date, date + 1) } # generate data for placement into the cache
+      let(:key) { "zc_#{seattle_zip_code}" }
 
       before do
         allow(Rails).to receive(:cache).and_return(memory_store)
         Rails.cache.clear
+        Rails.cache.write(key, result[:data])
       end
 
-      it 'will use cached result', vcr: { cassette_name: 'get_data' } do
-        Rails.cache.write('zc_98109', result[:data])
-        result2 = service.data_for('98109', date, date + 1)
+      it 'will use cached result when zip code matches', vcr: { cassette_name: 'get_data' } do
+        expect(service.data_for('98109', date, date + 1)[:from_cache]).to eq(true)
+      end
 
-        expect(result2[:from_cache]).to eq(true)
+      it 'will not use cached data when zip code does not match', vcr: { cassette_name: 'fair_lawn_data' } do
+        expect(service.data_for(fair_lawn_zip_code, date, date + 1)[:from_cache]).to eq(false)
       end
     end
   end

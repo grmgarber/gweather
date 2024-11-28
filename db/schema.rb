@@ -10,17 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_28_032942) do
+ActiveRecord::Schema[7.1].define(version: 20_241_128_032_942) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "zip_codes", force: :cascade do |t|
-    t.string "time_zone"
-    t.float "lat"
-    t.float "lon"
-    t.string "state_abbr"
-    t.string "postal_code"
-    t.index ["postal_code"], name: "index_zip_codes_on_postal_code"
+  create_table 'zip_codes', force: :cascade do |t|
+    t.string 'time_zone'
+    t.float 'lat'
+    t.float 'lon'
+    t.string 'state_abbr'
+    t.string 'postal_code'
+    t.index ['postal_code'], name: 'index_zip_codes_on_postal_code'
   end
-
 end

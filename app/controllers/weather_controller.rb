@@ -14,7 +14,7 @@ class WeatherController < ApplicationController
         respond_to do |format|
           format.turbo_stream do
             render turbo_stream:
-                     turbo_stream.replace("results", partial: "weather/results")
+                     turbo_stream.replace('results', partial: 'weather/results')
           end
           format.html do
             render 'show'
@@ -22,15 +22,15 @@ class WeatherController < ApplicationController
         end
       end
     else
-      if zip_code.present? && zip_code.state_abbr != @location.state_abbr
-        @error = 'Incorrect Zip Code for the specified State'
-      else
-        @error = 'Invalid Zip Code'
-      end
+      @error = if zip_code.present? && zip_code.state_abbr != @location.state_abbr
+                 'Incorrect Zip Code for the specified State'
+               else
+                 'Invalid Zip Code'
+               end
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream:
-                   turbo_stream.replace("results", partial: "weather/invalid_location")
+                   turbo_stream.replace('results', partial: 'weather/invalid_location')
         end
         format.html do
           render 'show'
