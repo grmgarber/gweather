@@ -3,14 +3,19 @@
   <p>Data extracted from Rails cache: <b><%= @data[:from_cache] %></b></p>
 
   <% cc = @data[:data]['currentConditions'] %>
+
   <div>
     <div><b>Current Conditions</b></div>
-    <div class="item"><%= cc['conditions'] %></div>
-    <div class="item">Temperature: <%= cc['temp'] %></div>
-    <div class="item">Feels Like: <%= cc['feelslike'] %></div>
-    <div class="item">Humidity: <%= cc['humidity'] %></div>
-    <div class="item">Dew Point: <%= cc['dew'] %></div>
-    <div class="item">Precipitation: <%= cc['precip'] %></div>
+    <% if cc.present? %>
+      <div class="item"><%= cc['conditions'] %></div>
+      <div class="item">Temperature: <%= cc['temp'] %></div>
+      <div class="item">Feels Like: <%= cc['feelslike'] %></div>
+      <div class="item">Humidity: <%= cc['humidity'] %></div>
+      <div class="item">Dew Point: <%= cc['dew'] %></div>
+      <div class="item">Precipitation: <%= cc['precip'] %></div>
+    <% else %>
+      <div class="item">Unavailable, try again later</div>
+    <% end %>
   </div>
   <% @data[:data]['days'].each do |day| %>
     <div class="day">
