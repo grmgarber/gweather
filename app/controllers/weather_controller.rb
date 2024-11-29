@@ -2,10 +2,6 @@
 
 # The only controller in this application
 class WeatherController < ApplicationController
-  def new
-    # @location = Location.new
-  end
-
   def show # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     @zip_code = ZipCode.find_by(postal_code: params[:zip_code])
     if @zip_code.present?
