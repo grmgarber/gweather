@@ -11,12 +11,11 @@ In fact, being a trivial single page application, it does not include a single l
 
 We have only one static model (named ZipCode) which is based on zip_codes table.
 It is included for the sole purpose of making sure that user-provided ZIP Code actually exists, prior to invoking the API.
-If you want to play with the application, populate the development database with a couple of zip_codes records.
-See an example in lines 12-13 of `spec/services/weather_service_spec.rb` of two zip code records:
+However, if a zip code is missing from this table, the application will say this zip code is invalid.
+
+We have included only two zip codes in `20241129041054_populate_zip_codes.rb` migration, which should be sufficient for demo purposes:
   - 07410 (Fair Lawn, NJ) 
   - 98109 (Queen Ann in Seattle)
-
-Migrations do not populate zip_codes table with all US zip_codes, as I felt that it would be an overkill for this demo.
 
 The application passes all rubocop and brakeman checks.
 

@@ -29,10 +29,4 @@ class WeatherController < ApplicationController
       end
     end
   end
-
-  # private
-  #
-  # # def location_params
-  #   params.require(:location).permit(:city, :state_abbr, :zip_code)
-  # end
 end
