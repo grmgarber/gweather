@@ -9,8 +9,7 @@ class WeatherController < ApplicationController
       @data = WeatherService.new.data_for(@zip_code.postal_code, now_date, now_date + 1)
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream:
-                   turbo_stream.replace('results', partial: 'weather/results')
+          render turbo_stream: turbo_stream.replace('results', partial: 'weather/results')
         end
         format.html do
           render 'show'
@@ -20,8 +19,7 @@ class WeatherController < ApplicationController
       @error = 'Specified ZIP Code is invalid'
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream:
-                   turbo_stream.replace('results', partial: 'weather/invalid_location')
+          render turbo_stream: turbo_stream.replace('results', partial: 'weather/invalid_location')
         end
         format.html do
           render 'show'
