@@ -1,4 +1,4 @@
-class CreateZipCodes < ActiveRecord::Migration[8.0]
+class CreateZipCodes < ActiveRecord::Migration[7.1]
   def change
     create_table :zip_codes do |t|
       t.string :time_zone

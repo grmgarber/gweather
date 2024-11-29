@@ -1,24 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple Rails application to display weather information for a user-provided US Zip Code.
+It uses a free Weather API https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[location]/[date1]/date2?key=YOUR_API_KEY
 
-Things you may want to cover:
+Using Ruby 3.3.6 and Rails 7.1.5 here.
 
-* Ruby version
+I wanted to use hotwire's turbo stream instead of AJAX, which required rails 7+.
+In fact, being a trivial single page application, it does not include a single line of custom Javascript.
 
-* System dependencies
+We have only one static model (named ZipCode) which is based on zip_codes table.
+It is included for the sole purpose of making sure that user-provided ZIP Code actually exists, prior to invoking the API.
+If you want to play with the application, populate the development database with a couple of zip_codes records.
+See an example in lines 12-13 of spec/services/weather_service_spec.rb
+Migrations only create schema and an index, but do not populate zip_codes table with all US zip_codes, as I felt that
+it would be an overkill for this demo.
 
-* Configuration
+The application passes all rubocop and brakeman checks.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Run all specs
