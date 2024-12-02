@@ -1,35 +1,14 @@
 <div id='results'>
-  <h4><%= @zip_code.with_state_string %> Weather</h4>
+  <h4><%= @zip_code.with_state_string %></h4>
   <p>Data extracted from Rails cache: <b><%= @data[:from_cache] %></b></p>
 
-  <% cc = @data[:data]['currentConditions'] %>
 
-  <div>
-    <div><b>Current Conditions</b></div>
-    <% if cc.present? %>
-      <div class="item"><%= cc['conditions'] %></div>
-      <div class="item">Temperature: <%= cc['temp'] %></div>
-      <div class="item">Feels Like: <%= cc['feelslike'] %></div>
-      <div class="item">Humidity: <%= cc['humidity'] %></div>
-      <div class="item">Dew Point: <%= cc['dew'] %></div>
-      <div class="item">Precipitation: <%= cc['precip'] %></div>
-    <% else %>
-      <div class="item">Unavailable, try again later</div>
-    <% end %>
-  </div>
-  <% @data[:data]['days'].each do |day| %>
+  <% @data[:data]['days'].each do |day_data| %>
     <div class="day">
-      <b><%= day['datetime'] %></b>: <%= day['description'] %>
-      <% day['hours'].each do |hour| %>
-        <div class="hour">
-            <div class="item"><b>Time: <%= hour['datetime'] %></b></div>
-            <div class="item">Temperature: <%= hour['temp'] %></div>
-            <div class="item">Feels Like: <%= hour['feelslike'] %></div>
-            <div class="item">Humidity: <%= hour['humidity'] %></div>
-            <div class="item">Dew Point: <%= hour['dew'] %></div>
-            <div class="item">Precipitation: <%= hour['precip'] %></div>
-        </div>
-      <% end %>
+      <div><%= day_label(day_data) %></div>
+      <div><%= day_description(day_data) %></div>
     </div>
   <% end %>
 </div>
+
+

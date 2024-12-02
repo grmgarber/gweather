@@ -1,4 +1,4 @@
-<h2>Current and Hourly Weather for Today and Tomorrow</h2>
+<h2>7-day Weather Forecast</h2>
 
 <%= form_with url: weather_path, model: @location, method: :get, data: {turbo_stream: true} do |f| %>
   <%= f.label :zip_code, 'US ZIP Code' %>

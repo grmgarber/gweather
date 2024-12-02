@@ -4,6 +4,6 @@
 # We use use it to make sure user-specified ZIP Code is valid.
 class ZipCode < ActiveRecord::Base
   def with_state_string
-    "#{postal_code}, #{state_abbr}"
+    "Location: #{state_abbr} #{postal_code}"
   end
 end
