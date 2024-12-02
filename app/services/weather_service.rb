@@ -19,7 +19,7 @@ class WeatherService
     service_invoked = false
     svc_error = false
     data = Rails.cache.fetch("zc_#{location}", expires_in: CACHE_EXPIRES_INTERVAL) do
-      resp = Net::HTTP.get URI("#{BASE_URI}/#{location}/#{date1}/#{date2}?key=#{API_KEY}&include=fcst.json")
+      resp = Net::HTTP.get URI("#{BASE_URI}/#{location}/#{date1}/#{date2}?key=#{API_KEY}")
       service_invoked = true
       begin
         JSON.parse(resp)

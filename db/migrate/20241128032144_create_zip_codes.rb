@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Create zip_codes table
 class CreateZipCodes < ActiveRecord::Migration[7.1]
   def change
     create_table :zip_codes do |t|

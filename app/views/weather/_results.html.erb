@@ -2,11 +2,28 @@
   <h4><%= @zip_code.with_state_string %></h4>
   <p>Data extracted from Rails cache: <b><%= @data[:from_cache] %></b></p>
 
+  <div>
+    <div class="heading">Current Conditions</div>
+    <% cc = @data[:data]['currentConditions'] %>
+    <% if cc.present? %>
+      <ul>
+        <li class="item">Data Time (local): <%= cc['datetime'] %></li>
+        <li class="item">Condition: <%= cc['conditions'] %></li>
+        <li class="item">Temperature: <%= fahrenheit(cc['temp']) %></li>
+        <li class="item">Feels Like: <%= fahrenheit(cc['feelslike']) %></li>
+        <li class="item">Humidity: <%= cc['humidity'] %>%</li>
+        <li class="item">Dew Point: <%= fahrenheit(cc['dew']) %></li>
+        <li class="item">Precipitation: <%= cc['precip'] %>″</li>
+        </ul>
+    <% else %>
+      <div class="item">Unavailable, try again later</div>
+    <% end %>
+  </div>
 
   <% @data[:data]['days'].each do |day_data| %>
     <div class="day">
-      <div><%= day_label(day_data) %></div>
-      <div><%= day_description(day_data) %></div>
+      <span class="heading"><%= day_label(day_data) %>:</span>
+      <span><%= day_description(day_data) %></span>
     </div>
   <% end %>
 </div>

@@ -1,0 +1,6 @@
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+  NewCops: disable
+  SuggestExtensions: false
+
