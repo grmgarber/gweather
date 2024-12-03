@@ -17,7 +17,7 @@ We have only one static model (named ZipCode) which is based on zip_codes table.
 It is included for the sole purpose of NOT invoking the API if user enters an zip code that does not exist, e.g, 00000.
 If a zip code is missing from this table, the application will say this zip code is invalid.
 
-IMPORTANT!!!
+**IMPORTANT**:
     I have included only two zip codes in the `20241129041054_populate_zip_codes.rb` migration, which should be sufficient for the demo purposes:
         07410 (Fair Lawn, NJ) and 98109 (Queen Ann in Seattle).
 
