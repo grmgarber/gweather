@@ -12,14 +12,13 @@ require 'net/http'
 # rubocop:enable Layout/LineLength
 class WeatherService
   BASE_URI = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/'
-  API_KEY = 'VMVGJSENXDBK8VPNBERCDX3XQ'
   CACHE_EXPIRES_INTERVAL = 30.minutes
 
   def data_for(location, date1, date2) # rubocop:disable Metrics/MethodLength
     service_invoked = false
     svc_error = false
     data = Rails.cache.fetch("zc_#{location}", expires_in: CACHE_EXPIRES_INTERVAL) do
-      resp = Net::HTTP.get URI("#{BASE_URI}/#{location}/#{date1}/#{date2}?key=#{API_KEY}")
+      resp = Net::HTTP.get URI("#{BASE_URI}/#{location}/#{date1}/#{date2}?key=#{api_key}")
       service_invoked = true
       begin
         JSON.parse(resp)
@@ -29,5 +28,11 @@ class WeatherService
       end
     end
     { data: data, from_cache: !service_invoked, error: svc_error }
+  end
+
+  private
+
+  def api_key
+    Rails.application.credentials.visualcrossing_key
   end
 end

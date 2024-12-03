@@ -6,7 +6,7 @@ RSpec.describe WeatherService do # rubocop:disable Metrics/BlockLength
   let(:seattle_zip_code) { '98109' }
   let(:fair_lawn_zip_code) { '07410' }
   let(:service) { WeatherService.new }
-  let(:date) { Date.new(2024, 11, 28) }
+  let(:date) { Date.new(2024, 12, 2) }
 
   before do
     ZipCode.create(lat: 40.9363, lon: -74.119497, state_abbr: 'NJ', postal_code: fair_lawn_zip_code)
@@ -24,12 +24,13 @@ RSpec.describe WeatherService do # rubocop:disable Metrics/BlockLength
       it 'produces expected results', vcr: { cassette_name: 'get_data' } do
         result = service.data_for(seattle_zip_code, date, date + 1)
 
-        expect(result[:data].slice('latitude', 'longitude', 'resolvedAddress', 'timezone'))
+        expect(result[:data].slice('latitude', 'longitude', 'resolvedAddress', 'timezone', 'description'))
           .to eq({
                    'latitude' => 47.630648,
                    'longitude' => -122.34675,
                    'resolvedAddress' => '98109, USA',
-                   'timezone' => 'America/Los_Angeles'
+                   'timezone' => 'America/Los_Angeles',
+                   'description' => 'Cooling down with no rain expected.'
                  })
       end
     end
