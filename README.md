@@ -26,4 +26,8 @@ IMPORTANT:
 
 The application passes all rubocop and brakeman checks.
 
+This is how it looks:
+![img.png](img.png)
+
+
 
