@@ -20,11 +20,15 @@ module WeatherHelper
 
   # return Today, Tomorrow or nothing
   def relative_date_description(date)
-    today = controller.now.to_date
+    today = controller.today
     if date == today
       'Today,'
     elsif date == today + 1
       'Tomorrow,'
     end
+  end
+
+  def local_time_with_zone(data, current_conditions)
+    "#{data[:data]['days'].first['datetime']} #{current_conditions['datetime']} #{controller.today.beginning_of_day.strftime('%Z')}" # rubocop:disable Layout/LineLength
   end
 end

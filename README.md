@@ -14,8 +14,11 @@ Encrypted API key for visualcrossing API is located in `config/credentials.yml.e
 The application passes all rubocop/rspec/brakeman checks.
 
 We have only one static model (named ZipCode) which is based on zip_codes table.
-It is included for the sole purpose of NOT invoking the API if user enters an zip code that does not exist, e.g, 00000.
-If a zip code is missing from this table, the application will say this zip code is invalid.
+It is included for two reasons:
+    1) We do not want to invoke the API unless we know that the entered zip code is valid (e.g., not 00001, etc)
+    2) Dates that we pass to the service need to be in TZ of the desired location, as opposed to server's TZ
+
+If a zip code is missing from this table, the application will say this zip code is invalid without invoking the API
 
 **IMPORTANT**:
     I have included only two zip codes in the `20241129041054_populate_zip_codes.rb` migration, which should be sufficient for the demo purposes:
@@ -26,7 +29,7 @@ If a zip code is missing from this table, the application will say this zip code
     However, I have all US zip codes loaded in my local database, and I will be able to demonstrate it if we have a chance to meet online.
 
 This is how it looks:
-![img.png](img.png)
+![img_1.png](img_1.png)
 
 
 

@@ -7,7 +7,7 @@
     <% cc = @data[:data]['currentConditions'] %>
     <% if cc.present? %>
       <ul>
-        <li class="item">Data Time (local): <%= cc['datetime'] %></li>
+        <li class="item">Data Timestamp: <%= local_time_with_zone(@data, cc) %></li>
         <li class="item">Condition: <%= cc['conditions'] %></li>
         <li class="item">Temperature: <%= fahrenheit(cc['temp']) %></li>
         <li class="item">Feels Like: <%= fahrenheit(cc['feelslike']) %></li>
