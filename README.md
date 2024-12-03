@@ -8,6 +8,8 @@ Using Ruby 3.3.6 and Rails 7.1.5.
 
 I wanted to use hotwire's turbo stream instead of AJAX, which required rails 7+.
 In fact, being a trivial single page application, it does not include a single line of custom Javascript thanls to hotwire.
+ 
+Encrypted API key for visualcrossing API is located in `config/credentials.yml.enc`.
 
 We have only one static model (named ZipCode) which is based on zip_codes table.
 It is included for the sole purpose of NOT invoking the API if user enters an zip code that does not exist, e.g, 00000.
