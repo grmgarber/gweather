@@ -21,7 +21,7 @@ If a zip code is missing from this table, the application will say this zip code
     I have included only two zip codes in the `20241129041054_populate_zip_codes.rb` migration, which should be sufficient for the demo purposes:
         07410 (Fair Lawn, NJ) and 98109 (Queen Ann in Seattle).
 
-    ANY OTHER ZIP CODE WILL BE FLAFFED AS INVALID because I do not want arbitrary people to be able to use the application
+    ANY OTHER ZIP CODE WILL BE FLAGGED AS INVALID because I do not want public to be able to use the application
     which is located in a public github repository (If a certain threshold is exceeded, visualcrossing will start charging my account).
     However, I have all US zip codes loaded in my local database, and I will be able to demonstrate it if we have a chance to meet online.
 
