@@ -9,8 +9,6 @@ class WeatherController < ApplicationController
     clear_today
     @zip_code = ZipCode.find_by(postal_code: params[:zip_code])
     if @zip_code.present?
-      # Since US spans multiple time zones, we want dates relative to the location's TZ, not the server's TZ.
-      Time.zone = @zip_code.time_zone
       @data = WeatherService.new.data_for(@zip_code.postal_code, today, today + FORECAST_LENGTH_IN_DAYS - 1)
       respond_to do |format|
         format.turbo_stream do
@@ -35,9 +33,10 @@ class WeatherController < ApplicationController
     end
   end
 
-  # We will use the current date several times per request, but calculating it only once per request.
   def today
-    @today ||= Date.today
+    # We will use the current date several times per request, but calculating it only once per request.
+    # Since US spans multiple time zones, we want dates relative to the location's TZ, not the server's TZ.
+    @today ||= Time.use_zone(@zip_code.time_zone) { Date.today }
   end
 
   private
