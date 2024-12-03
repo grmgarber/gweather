@@ -1,7 +1,7 @@
 # README
 
 This is a simple Rails application to display weather information for a user-provided US Zip Code.
-Data comes from the free layer of this weather API: https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[location]/[date1]/date2?key=YOUR_API_KEY
+Data comes from the free layer of this weather API: https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[location]/[date1]/date2?key=YOUR_API_KEY .
 We show both current weather (latest info available), as well as weather forecast for 7 days including current date.
 
 Using Ruby 3.3.6 and Rails 7.1.5.
