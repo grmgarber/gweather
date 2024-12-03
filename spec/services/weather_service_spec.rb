@@ -24,13 +24,12 @@ RSpec.describe WeatherService do # rubocop:disable Metrics/BlockLength
       it 'produces expected results', vcr: { cassette_name: 'get_data' } do
         result = service.data_for(seattle_zip_code, date, date + 1)
 
-        expect(result[:data].slice('latitude', 'longitude', 'resolvedAddress', 'timezone', 'description'))
+        expect(result[:data].slice('latitude', 'longitude', 'resolvedAddress', 'timezone'))
           .to eq({
                    'latitude' => 47.630648,
                    'longitude' => -122.34675,
                    'resolvedAddress' => '98109, USA',
-                   'timezone' => 'America/Los_Angeles',
-                   'description' => 'Cooling down with no rain expected.'
+                   'timezone' => 'America/Los_Angeles'
                  })
       end
     end

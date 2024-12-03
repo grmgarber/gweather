@@ -29,6 +29,6 @@ module WeatherHelper
   end
 
   def local_time_with_zone(data, current_conditions)
-    "#{data[:data]['days'].first['datetime']} #{current_conditions['datetime']} #{controller.today.beginning_of_day.strftime('%Z')}" # rubocop:disable Layout/LineLength
+    "#{data[:data]['days'].first['datetime']} #{current_conditions['datetime']} #{@zip_code.time_zone}"
   end
 end

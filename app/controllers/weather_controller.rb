@@ -6,7 +6,6 @@ class WeatherController < ApplicationController
 
   FORECAST_LENGTH_IN_DAYS = 7 # Extended forecast for one week
   def show # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-    clear_today
     @zip_code = ZipCode.find_by(postal_code: params[:zip_code])
     if @zip_code.present?
       @data = WeatherService.new.data_for(@zip_code.postal_code, today, today + FORECAST_LENGTH_IN_DAYS - 1)
@@ -37,11 +36,5 @@ class WeatherController < ApplicationController
     # We will use the current date several times per request, but calculating it only once per request.
     # Since US spans multiple time zones, we want dates relative to the location's TZ, not the server's TZ.
     @today ||= Time.use_zone(@zip_code.time_zone) { Date.today }
-  end
-
-  private
-
-  def clear_today
-    @today = nil
   end
 end
