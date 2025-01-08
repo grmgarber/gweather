@@ -4,6 +4,10 @@
 class WeatherController < ApplicationController
   FORECAST_LENGTH_IN_DAYS = 7 # Extended forecast for one week
 
+  def new
+    @location = false
+  end
+
   def show # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     @zip_code = ZipCode.find_by(postal_code: params[:zip_code])
     if @zip_code.present?
