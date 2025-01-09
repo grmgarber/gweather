@@ -52,6 +52,7 @@
     <orderEntry type="library" scope="PROVIDED" name="capybara (v3.40.0, rbenv: 3.3.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.3.4, rbenv: 3.3.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="connection_pool (v2.5.0, rbenv: 3.3.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="crack (v1.0.0, rbenv: 3.3.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, rbenv: 3.3.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="date (v3.4.1, rbenv: 3.3.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="debug (v1.10.0, rbenv: 3.3.6) [gem]" level="application" />
@@ -59,6 +60,7 @@
     <orderEntry type="library" scope="PROVIDED" name="drb (v2.2.1, rbenv: 3.3.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubi (v1.13.1, rbenv: 3.3.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalid (v1.2.1, rbenv: 3.3.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="hashdiff (v1.1.2, rbenv: 3.3.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v1.14.6, rbenv: 3.3.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="importmap-rails (v2.1.0, rbenv: 3.3.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="io-console (v0.8.0, rbenv: 3.3.6) [gem]" level="application" />
@@ -127,6 +129,7 @@
     <orderEntry type="library" scope="PROVIDED" name="useragent (v0.16.11, rbenv: 3.3.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="vcr (v6.3.1, rbenv: 3.3.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="web-console (v4.2.1, rbenv: 3.3.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="webmock (v3.24.0, rbenv: 3.3.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket (v1.2.11, rbenv: 3.3.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-driver (v0.7.7, rbenv: 3.3.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-extensions (v0.1.5, rbenv: 3.3.6) [gem]" level="application" />
@@ -530,6 +533,8 @@
           <RakeTaskImpl id="spec">
             <subtasks>
               <RakeTaskImpl description="Run the code examples in spec/controllers" fullCommand="spec:controllers" id="controllers" />
+              <RakeTaskImpl description="Run the code examples in spec/features" fullCommand="spec:features" id="features" />
+              <RakeTaskImpl description="Run the code examples in spec/requests" fullCommand="spec:requests" id="requests" />
               <RakeTaskImpl description="Run the code examples in spec/services" fullCommand="spec:services" id="services" />
               <RakeTaskImpl description="" fullCommand="spec:prepare" id="prepare" />
               <RakeTaskImpl description="" fullCommand="spec:statsetup" id="statsetup" />

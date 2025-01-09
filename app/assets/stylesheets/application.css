@@ -17,3 +17,12 @@
 div.day { padding-top: 10px; }
 ul { margin: 3px 0; }
 .heading { font-weight: 800; color: brown; }
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}

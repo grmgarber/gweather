@@ -2,7 +2,7 @@
 
 <%= form_with url: weather_path, model: @location, method: :get, data: {turbo_stream: true} do |f| %>
   <%= f.label :zip_code, 'US ZIP Code' %>
-  <%= f.text_field :zip_code, placeholder: '5 digits', required: true, maxlength: 5, minlength: 5 %>
+  <%= f.text_field :zip_code, placeholder: '5 digits', required: true, minlength: 5, maxlength: 5 %>
 
   <%= f.submit 'Look up weather' %>
 <% end %>
